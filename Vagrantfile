@@ -8,6 +8,13 @@
 Vagrant::Config.run do |config|
   config.vm.box = "opscode_ubuntu-14.04"
 
+  config.vm.provision :chef_client do |chef|
+    chef.chef_server_url = "https://api.opscode.com/organizations/chefdr"
+    chef.validation_key_path = "./.chef/chefdr-validator.pem"
+    chef.validation_client_name = "chefdr-validator"
+    chef.node_name = "darrenrabb"
+  end
+
 #CHEF_VERSION = "11.10.4"
 #Vagrant.configure(2) do |config|
   # The most common configuration options are documented and commented below.
@@ -61,6 +68,7 @@ Vagrant::Config.run do |config|
   #   vb.memory = "1024"
   # end
   #
+  
   # View the documentation for the provider you are using for more
   # information on available options.
 
